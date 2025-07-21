@@ -115,7 +115,7 @@ class FormatBase(metaclass=ABCMeta):
         if self.partition_by:
             # partition_by values are inserted as folders after the stream name
             partition_path = "/".join(self.partition_by) + "/"
-        folder_path = f"{self.bucket}/{self.prefix}/{stream_name}__" + partition_path
+        folder_path = f"{self.bucket}/{self.prefix}/{stream_name}-" + partition_path
         file_name = ""
         if self.config["append_date_to_prefix"]:
             grain = DATE_GRAIN[self.config["append_date_to_prefix_grain"].lower()]
