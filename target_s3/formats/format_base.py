@@ -1,14 +1,9 @@
-import re
-import inflection
-import json
-import collections
 import logging
-from datetime import datetime
 from abc import ABCMeta, abstractmethod
+from datetime import datetime
 
 from boto3 import Session
 from smart_open import open
-
 
 LOGGER = logging.getLogger("target-s3")
 DATE_GRAIN = {
