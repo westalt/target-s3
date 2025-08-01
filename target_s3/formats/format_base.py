@@ -72,10 +72,12 @@ class FormatBase(metaclass=ABCMeta):
         self.logger.info(f"key: {self.fully_qualified_key}")
 
     @abstractmethod
-    def _write(self, contents: str = None) -> None:
+    def _write(self, contents: str | None = None) -> None:
         """Execute the write to S3. (default)"""
         # TODO: create dynamic cloud
         # TODO: is there a better way to handle write contents ?
+        if contents is None:
+            return
         with open(
             f"s3://{self.fully_qualified_key}",
             "w",
@@ -180,7 +182,7 @@ class FormatBase(metaclass=ABCMeta):
         )
         return ret
 
-    def append_process_date(self, records) -> dict:
+    def append_process_date(self, records) -> list:
         """A function that appends the current UTC to every record"""
 
         def process_date(record):
